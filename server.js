@@ -1,37 +1,32 @@
-// Require Express and Body Parser
-let express = require("express");
-let bodyParser = require("body-parser");
+var express = require("express");
+var bodyParser = require("body-parser");
 
-// ==============================================================================
-// EXPRESS CONFIGURATION
-// This sets up the basic properties for our express server
-// ==============================================================================
-
-// Tells node that we are creating an "express" server
-var app = express();
-
-// Sets an initial port. We"ll use this later in our listener
 var PORT = process.env.PORT || 8080;
 
-// Sets up the Express app to handle data parsing
+var app = express();
+
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
+
+// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse application/json
 app.use(bodyParser.json());
 
-// ================================================================================
-// ROUTER
-// The below points our server to a series of "route" files.
-// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
-// ================================================================================
+// Set Handlebars.
+const exphbs = require("express-handlebars");
 
-// Example routes
-// require("./app/routes/apiRoutes")(app);
-// require("./app/routes/htmlRoutes")(app);
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-// =============================================================================
-// LISTENER
-// The below code effectively "starts" our server
-// =============================================================================
+// Import routes and give the server access to them.
+const routes = require("./controllers/burgers_controller.js");
 
+app.use(routes);
+
+// Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
-    console.log("App listening on PORT: " + PORT);
+    // Log (server-side) when our server has started
+    console.log("Server listening on: http://localhost:" + PORT);
 });

@@ -3,13 +3,13 @@ var express = require("express");
 var router = express.Router();
 
 // Import the model (buger.js) to use its database functions.
-var buger = require("../models/burgers.js");
+var buger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
     buger.selectAll(function(data) {
         var hbsObject = {
-            bugers: data
+            burgers: data
         };
         console.log(hbsObject);
         res.render("index", hbsObject);
@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 });
 
 router.post("/api/bugers", function(req, res) {
-    buger.createOne([
+    burger.insertOne([
         "burger_name", "devoured"
     ], [
         req.body.burger_name, req.body.devoured
