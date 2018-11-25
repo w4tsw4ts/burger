@@ -2,23 +2,8 @@
 
 <h2>Bugers that are not devoured!</h2>
 
-<!--<ul>-->
-    <!--{{#each bugers}}-->
-        <!--{{#unless devoured}}-->
-            <!--{{> bugers/buger-block devoured=true}}-->
-        <!--{{/unless}}-->
-    <!--{{/each}}-->
-<!--</ul>-->
-
 <h2>Eat-Da-Bugers!</h2>
 
-<!--<ul>-->
-    <!--{{#each bugers}}-->
-        <!--{{#if devoured}}-->
-            <!--{{> bugers/buger-block devoured=false}}-->
-        <!--{{/if}}-->
-    <!--{{/each}}-->
-<!--</ul>-->
 
 <h2>Add a burger</h2>
 <form class="create-form">
@@ -30,8 +15,7 @@
 
     <div class="form-group">
         <label for="devoured">devoured?</label><br>
-        <input type="radio" name="devoured" value="1" checked> Devoured!<br>
-        <input type="radio" name="devoured" value="0"> Awake
+        <input type="image" id="ca" name="devoured" value="1" checked> Devoured!<br>
     </div>
 
     <button type="submit">Add burger</button>
